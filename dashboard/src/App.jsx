@@ -3,6 +3,9 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 
+// Layouts
+import DashboardLayout from './layouts/DashboardLayout';
+
 // Páginas
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -24,10 +27,12 @@ function App() {
           {/* Redirección por defecto */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-          {/* Rutas Privadas (Protegidas) */}
+          {/* Rutas Privadas (Protegidas) con Layout */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<DashboardHome />} />
-            {/* Aquí agregaremos más rutas privadas luego: /dashboard/espacios, etc. */}
+            <Route element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<DashboardHome />} />
+              {/* Aquí agregaremos más rutas privadas */}
+            </Route>
           </Route>
         </Routes>
       </AuthProvider>
